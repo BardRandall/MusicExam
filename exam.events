@@ -1,0 +1,91 @@
+a:2:{s:5:"start";a:8:{s:8:"sqplayer";N;s:7:"gettune";a:1:{s:9:"onexecute";s:164:"while (true){
+$rand = rand(1, 10);
+if(file_exists("system/".$rand.".ini")){
+
+}else{
+file_put_contents("system/".$rand.".ini", "");
+return $rand;
+break;
+}
+}";}s:9:"spbutton1";a:1:{s:7:"onclick";s:634:"GLOBAL $answer, $pos_tune;
+c("spButton1")->enabled = false;
+c("label_pos")->visible = true;
+c("sqPlayer")->stop();
+if($pos_tune == 9){
+c("spButton1")->caption = "Узнать ответы";
+}else{
+c("spButton1")->caption = "Далее";
+}
+$pos_tune++;
+//pre($pos_tune);
+if ($pos_tune < 11){
+c("progress")->position = $pos_tune;
+c("label_pos")->caption = "Мелодия №".$pos_tune;
+$number = getTune($pos_tune);
+c("sqPlayer")->fileName = "data/".$number.".mp3";
+$answer[$pos_tune] = getName($number);
+c("sqPlayer")->play();
+c("spButton1")->enabled = true;
+//pre($answer);
+}else{
+ShowForm(result, SW_SHOW);
+HideForm(start, SW_SHOW);
+}";}s:8:"--fmedit";a:1:{s:8:"oncreate";s:156:"GLOBAL $pos_tune;
+$pos_tune = 0;
+$answer = array();
+for($i=0;$i<11;$i++){
+if(file_exists("system/".$i.".ini")){
+file_delete("system/".$i.".ini");
+}
+}";}s:7:"getname";a:1:{s:9:"onexecute";s:686:"switch ($number){
+    case 1:
+    return "Шостакович Ленинградская симфония";
+    break;
+    case 2:
+    return "Шуберт Прекрасная мельничиха";
+    break;
+    case 3:
+    return "Бетховен Увертюра Эгмонт";
+    break;
+    case 4:
+    return "Мусоргский Борис Годунов";
+    break;
+    case 5:
+    return "Чайковский Евгений Онегин";
+    break;
+    case 6:
+    return "Прокофьев Александр Невский";
+    break;
+    case 7:
+    return "Римский-Корсаков Снегурочка";
+    break;
+    case 8:
+    return "Римский-Корсаков Шехеризада";
+    break;
+    case 9:
+    return "Шопен Ноктюрн фа минор";
+    break;
+    case 10:
+    return "Гайдн Симфония 103";
+    break;
+}";}s:9:"label_pos";N;s:8:"progress";N;s:5:"link1";a:1:{s:7:"onclick";s:44:"MessageBox("egorsbrodov@mail.ru", "E-mail");";}}s:6:"result";a:1:{s:8:"--fmedit";a:1:{s:6:"onshow";s:738:"GLOBAL $answer;
+c("listBox1")->text .= "1) ".$answer[1];
+c("listBox1")->text .= "2) ".$answer[2];
+c("listBox1")->text .= "3) ".$answer[3];
+c("listBox1")->text .= "4) ".$answer[4];
+c("listBox1")->text .= "5) ".$answer[5];
+c("listBox1")->text .= "6) ".$answer[6];
+c("listBox1")->text .= "7) ".$answer[7];
+c("listBox1")->text .= "8) ".$answer[8];
+c("listBox1")->text .= "9) ".$answer[9];
+c("listBox1")->text .= "10) ".$answer[10];
+file_delete("system/1.ini");
+file_delete("system/2.ini");
+file_delete("system/3.ini");
+file_delete("system/4.ini");
+file_delete("system/5.ini");
+file_delete("system/6.ini");
+file_delete("system/7.ini");
+file_delete("system/8.ini");
+file_delete("system/9.ini");
+file_delete("system/10.ini");";}}}
